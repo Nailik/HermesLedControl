@@ -104,8 +104,18 @@ systemctl is-active -q pixel_ring_server && systemctl disable pixel_ring_server
 
 chown -R "${USER}" "${USERDIR}/HermesLedControl"
 
+
+echo "Debug 0"
+
 pip3 install virtualenv
+
+
+echo "Debug 1"
+
 pip3 uninstall -y pixel_ring
+
+
+echo "Debug 2"
 
 sudo -u "${USER}" bash <<EOF
     virtualenv -p ${PYTHON} ${FVENV}
@@ -113,20 +123,34 @@ sudo -u "${USER}" bash <<EOF
     pip install -r requirements.txt --no-cache-dir
 EOF
 
+echo "Debug 3"
+
 mkdir -p logs
 chown "${USER}" logs
+
+
+echo "Debug 4"
 
 if [[ "$device" != "don't overwrite existing parameters" && -f /etc/systemd/system/hermesledcontrol.service ]]; then
     rm /etc/systemd/system/hermesledcontrol.service
 fi
 
+
+echo "Debug 5"
+
 if [[ ! -f /etc/systemd/system/hermesledcontrol.service ]]; then
     cp hermesledcontrol.service /etc/systemd/system
 fi
 
+
+echo "Debug 6"
+
 if [[ "$device" != "don't overwrite existing parameters" && -f ${configurationFile} ]]; then
     rm "${configurationFile}"
 fi
+
+
+echo "Debug 7"
 
 if [[ "$device" != "don't overwrite existing parameters" && ! -f ${configurationFile} ]]; then
 	mkdir -p "${configurationPath}"
@@ -140,13 +164,20 @@ if [[ "$device" != "don't overwrite existing parameters" && ! -f ${configuration
 	sed -i -e "s/%DOA%/${doaConfigValue}/" "${configurationFile}"
 fi
 
+echo "Debug 8"
+
 escaped=${USERDIR//\//\\/}
 sed -i -e "s/%WORKING_DIR%/${escaped}\/HermesLedControl/" /etc/systemd/system/hermesledcontrol.service
 sed -i -e "s/%USER%/${USER}/" /etc/systemd/system/hermesledcontrol.service
 
+
+echo "Debug 9"
+
 if [[ "$device" != "don't overwrite existing parameters" ]]; then
     sed -i -e "s/%EXECSTART%/${escaped}\/HermesLedControl\/venv\/bin\/python main.py --hermesLedControlConfig=${escapedConfigurationFile}/" /etc/systemd/system/hermesledcontrol.service
 fi
+
+echo "Debug 10"
 
 echo "Do you need to install / configure your \"${device}\"? This is strongly suggested as it does turn off services that might conflict as well!"
 select answer in "yes" "no" "cancel"; do
