@@ -9,14 +9,14 @@ VENV=venv
 
 PYTHON=$(command -v python3.9)
 if [[ -z "$PYTHON" ]]; then
-    PYTHON=$(command -v python3.8)
-    if [[ -z "$PYTHON" ]]; then
-        PYTHON=$(command -v python3.7)
-        if [[ -z "$PYTHON" ]]; then
-            echo "Please make sure to have python 3.7 at least"
-            exit
-        fi
-    fi
+   # PYTHON=$(command -v python3.8)
+    #if [[ -z "$PYTHON" ]]; then
+     #   PYTHON=$(command -v python3.7)
+     #   if [[ -z "$PYTHON" ]]; then
+            echo "Please make sure to have python 3.9 at least"
+    #        exit
+    #    fi
+    #fi
 fi
 
 USER=$(logname)
@@ -122,7 +122,7 @@ echo "virtualenv -p ${PYTHON} ${FVENV} source ${FVENV}/bin/activate pip install 
 sudo -u "${USER}" bash <<EOF
     virtualenv -p ${PYTHON} ${FVENV}
     source ${FVENV}/bin/activate
-    pip3.7 install -r requirements.txt --no-cache-dir
+    pip3.9 install -r requirements.txt --no-cache-dir
 EOF
 
 #next test py -3.7 -m pip install -r numpy --no-cache-dir -> py not found
