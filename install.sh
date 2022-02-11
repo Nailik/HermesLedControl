@@ -122,7 +122,7 @@ echo "virtualenv -p ${PYTHON} ${FVENV} source ${FVENV}/bin/activate pip install 
 sudo -u "${USER}" bash <<EOF
     virtualenv -p ${PYTHON} ${FVENV}
     source ${FVENV}/bin/activate
-    pip3.7 install -r RPi.GPIO --no-cache-dir
+    pip3.7 install -r requirements.txt --no-cache-dir
 EOF
 
 #next test py -3.7 -m pip install -r numpy --no-cache-dir -> py not found
