@@ -115,15 +115,64 @@ echo "Debug 1"
 pip3 uninstall -y pixel_ring
 
 
-echo "Debug 2"
+echo "Debug 2 - crash is after here"
+
+echo "virtualenv -p ${PYTHON} ${FVENV} source ${FVENV}/bin/activate pip install -r requirements.txt --no-cache-dir"
+
+echo "Debug virtualenv"
 
 sudo -u "${USER}" bash <<EOF
     virtualenv -p ${PYTHON} ${FVENV}
     source ${FVENV}/bin/activate
-    pip install -r requirements.txt --no-cache-dir
 EOF
 
-echo "Debug 3"
+echo "Debug RPi.GPIO install"
+
+sudo -u "${USER}" bash <<EOF
+    virtualenv -p ${PYTHON} ${FVENV}
+    source ${FVENV}/bin/activate
+    pip install -r RPi.GPIO --no-cache-dir
+EOF
+
+echo "Debug spidev install"
+
+sudo -u "${USER}" bash <<EOF
+    pip install -r spidev --no-cache-dir
+EOF
+
+echo "Debug gpiozero install"
+
+sudo -u "${USER}" bash <<EOF
+    pip install -r gpiozero --no-cache-dir
+EOF
+
+echo "Debug paho-mqtt install"
+
+sudo -u "${USER}" bash <<EOF
+    pip install -r paho-mqtt --no-cache-dir
+EOF
+
+echo "Debug pyyaml install"
+
+sudo -u "${USER}" bash <<EOF
+    pip install -r pyyaml --no-cache-dir
+EOF
+
+echo "Debug numpy install"
+
+sudo -u "${USER}" bash <<EOF
+    pip install -r numpy --no-cache-dir
+EOF
+
+#next test py -3.7 -m pip install -r numpy --no-cache-dir
+
+#sudo -u "${USER}" bash <<EOF
+#    virtualenv -p ${PYTHON} ${FVENV}
+#    source ${FVENV}/bin/activate
+#    pip install -r requirements.txt --no-cache-dir
+#EOF
+
+echo "Debug 3- crash is before here"
 
 mkdir -p logs
 chown "${USER}" logs
