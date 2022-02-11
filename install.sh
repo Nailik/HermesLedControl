@@ -22,7 +22,7 @@ fi
 USER=$(logname)
 USERDIR='/home/'${USER}
 
-echo "What assistant engine are you using?"
+echo "What assistant engine are you using? - Debug"
 select engine in "projectalice" "rhasspy" "cancel"; do
     case "$engine" in
         cancel) exit;;
