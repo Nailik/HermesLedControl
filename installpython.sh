@@ -44,7 +44,7 @@ install_python () {
     fi
 
     echo "Your current Python version is: ${old_version}"
-
+	 
     echo "Updating system"
     apt -qq update < /dev/null
 
@@ -62,7 +62,7 @@ install_python () {
     cd Python-${new_version}
 
     echo "Prepare the source for the installation"
-    ./configure --enable-optimizations --prefix=/usr < /dev/null
+    ./configure --enable-optimizations --prefix=/usr --openssldir=/usr/lib/openssl < /dev/null
     make < /dev/null
     echo $("Install the new Python version " $new_version)
     make altinstall < /dev/null
