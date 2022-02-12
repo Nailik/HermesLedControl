@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 sudo apt update && sudo apt upgrade -y
 
 git clone https://bitbucket.org/sol_prog/raspberry-pi-gcc-binary.git
