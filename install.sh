@@ -122,7 +122,8 @@ echo "virtualenv -p ${PYTHON} ${FVENV} source ${FVENV}/bin/activate pip install 
 sudo -u "${USER}" bash <<EOF
     virtualenv -p ${PYTHON} ${FVENV}
     source ${FVENV}/bin/activate
-    sudo apt install ca-certificates python3-certifi
+    pip3 install gensim config --global http.sslVerify false
+    pip3 install --index-url=http://www.piwheels.org/simple/ linkchecker
     pip3 install --index-url=http://www.piwheels.org/simple/ --trusted-host www.piwheels.org -r requirements.txt --no-cache-dir
 EOF
 #next test py -3.7 -m pip install -r numpy --no-cache-dir -> py not found
