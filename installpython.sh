@@ -69,7 +69,7 @@ install_python () {
     cd Python-${new_version}
 
     echo "Prepare the source for the installation"
-    ./configure --enable-optimizations --prefix=/usr --openssldir=$OPENSSL < /dev/null
+    ./configure --enable-optimizations --prefix=/usr --with-openssl=$OPENSSL < /dev/null
     make < /dev/null
     echo $("Install the new Python version " $new_version)
     make altinstall < /dev/null
