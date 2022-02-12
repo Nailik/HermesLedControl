@@ -1,3 +1,5 @@
+# Commands used in the video https://youtu.be/-bCG87jBDqA :
+
 sudo apt update && sudo apt upgrade -y
 
 git clone https://bitbucket.org/sol_prog/raspberry-pi-gcc-binary.git
